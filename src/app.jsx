@@ -10,23 +10,47 @@ var App = React.createClass({
   mixins: [ReactFire],
   getInitialState: function() {
     return {
-      items: {}
+      items: {},
+      loaded: false
     }
   },
   componentWillMount: function() {
-    this.bindAsObject(new Firebase(rootUrl + 'items/'), 'items');
+    fb = new Firebase(rootUrl + 'items/');
+    this.bindAsObject(fb, 'items');
+    fb.on('value', this.handleDataLoaded);
   },
   render: function() {
     return  <div className="row panel panel-default">
-              <div className="col-md-8 col-md-offset-2">
-                <h2 className="text-center">
-                  To-Do List
-                </h2>
-                <Header itemsStore={this.firebaseRefs.items} />
-                <hr/>
-                <List items={this.state.items} />
-              </div>
-            </div>
+      <div className="col-md-8 col-md-offset-2">
+        <h2 className="text-center">
+          To-Do List
+        </h2>
+        <Header itemsStore={this.firebaseRefs.items} />
+        <hr/>
+        <div className={"content " + (this.state.loaded ? 'loaded' : '')}>
+          <List items={this.state.items} />
+          {this.deletButton}
+        </div>
+      </div>
+    </div>
+  },
+  deletButton: function() {
+    if(this.state.loaded){
+      return
+    } else {
+      return  <div className="text-center clear-complete">
+        <hr />
+        <button
+          type="button"
+          onClick={this.onDeleteDoneClick}
+          className="btn btn-default">
+          Clear Complete
+        </button>
+      </div>
+    }
+  },
+  handleDataLoaded: function() {
+    this.setState({loaded: true});
   }
 });
 
