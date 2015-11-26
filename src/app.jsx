@@ -2,6 +2,8 @@ var React = require('react');
 var ReactFire = require('reactfire');
 var Firebase = require('firebase');
 var Header = require('./header');
+var List = require('./list');
+
 var rootUrl = 'https://vivid-torch-8723.firebaseio.com/';
 
 var App = React.createClass({
