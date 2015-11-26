@@ -8,6 +8,11 @@ var rootUrl = 'https://vivid-torch-8723.firebaseio.com/';
 
 var App = React.createClass({
   mixins: [ReactFire],
+  getInitialState: function() {
+    return {
+      items: {}
+    }
+  },
   componentWillMount: function() {
     this.bindAsObject(new Firebase(rootUrl + 'items/'), 'items');
   },
@@ -18,6 +23,7 @@ var App = React.createClass({
                   To-Do List
                 </h2>
                 <Header itemsStore={this.firebaseRefs.items} />
+                <List items={this.state.items} />
               </div>
             </div>
   }
