@@ -23,6 +23,7 @@ var App = React.createClass({
                   To-Do List
                 </h2>
                 <Header itemsStore={this.firebaseRefs.items} />
+                <hr/>
                 <List items={this.state.items} />
               </div>
             </div>

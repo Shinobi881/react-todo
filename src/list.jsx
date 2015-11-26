@@ -4,9 +4,9 @@ var ListItem = require('./list-item');
 module.exports  = React.createClass({
     render: function() {
       console.log(this.props);
-      return  <ul>
+      return  <div>
         {this.renderList()}
-      </ul>
+      </div>
     },
     renderList: function() { // Acts as a spinner kind of.
       if(this.props.items && Object.keys(this.props.items).length === 0) {
