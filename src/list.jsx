@@ -12,6 +12,18 @@ module.exports  = React.createClass({
         return <h4>
           Add a todo to get started.
         </h4>
+      } else {
+        var children = [];
+
+        for(var key in this.props.items) {
+          children.push(
+            <li>
+              {this.props.items[key].text}
+            </li>
+            );
+        }
+        return children;
       }
+
     }
 });
