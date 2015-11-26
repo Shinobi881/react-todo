@@ -62,6 +62,7 @@ module.exports = React.createClass({
     },
     handleSaveClick: function() {
       this.fb.update({text: this.state.text});
+      this.setState({textChanged: false});
     },
     handleUndoClick: function(){
       this.setState({
